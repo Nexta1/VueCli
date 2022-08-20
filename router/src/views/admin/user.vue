@@ -1,24 +1,22 @@
 <template>
   <div>
-   <input type="text" v-model="usernameValue" >
-   {{usernameError}}
+    <form @submit="onSubmit">
+      <input type="text" v-model="usernameValue" @change="handleChange " />
+      {{ usernameError }}
+      <button>提交</button>
+    </form>
   </div>
-  <button>提交</button>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Form, Field, ErrorMessage,defineRule,useField, } from 'vee-validate'
-import { required, email } from '@vee-validate/rules'
-import {localize} from '@vee-validate/i18n'
-import zh_CN from '@vee-validate/i18n/dist/locale/zh_CN.json'
-defineRule('required', required)
-defineRule('email', email)
-const onSubmit = V => {
-  console.log(V)
-}
-const {errorMessage:usernameError,value:usernameValue} =useField('username',{required:true,email:true},)
-
+import validate from '../../plugins/validate/index'
+const {handleSubmit}= validate.useForm({validationSchema:{
+  username:validate.yup.string().required().label('用户名').email()
+}})
+const { errorMessage: usernameError, value: usernameValue ,handleChange} = validate.useField('username',{},{validateOnValueUpdate:false})
+const onSubmit = handleSubmit(v=>{
+  console.log(v)
+})
 </script>
 
 <style scoped>

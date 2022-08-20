@@ -18,55 +18,60 @@
           <div class="text-center">
             <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">MyWorld</h2>
 
-            <p class="mt-3 text-gray-500 dark:text-gray-300">Sign in to access your account</p>
+            <p class="mt-3 text-gray-500 dark:text-gray-300">登陆你的账户</p>
           </div>
 
           <div class="mt-8">
-            <form>
+            <form @submit="onSubmit">
               <div>
-                <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200"
-                  >Email Address Or Phone</label
-                >
+                <label for="phone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">用户名</label>
                 <input
-                  v-model="form.account"
-                  type="email"
-                  name="email"
-                  id="email"
-                  placeholder="example@example.com"
+                  v-model="accountValue"
+                  type="type"
+                  name="account"
+                  id="account"
+                  placeholder="请输入邮箱或手机号"
                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
-
+              <div class="text-white text-xs mt-2">{{ accountError }}</div>
               <div class="mt-6">
                 <div class="flex justify-between mb-2">
-                  <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Password</label>
+                  <label for="password" class="text-sm text-gray-600 dark:text-gray-200">账号密码</label>
                   <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline"
-                    >Forgot password?</a
+                    >忘记密码?</a
                   >
                 </div>
 
                 <input
-                v-model="form.password"
+                  v-model="passwordValue"
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="Your Password"
+                  @change="handleChange"
+                  placeholder="请输入密码"
                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
               </div>
-
+              <div class="text-white text-xs mt-2">{{ passwordError }}</div>
               <div class="mt-6">
                 <button
                   class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                 >
-                  Sign in
+                  登录
                 </button>
               </div>
+              <div class="flex justify-center">
+                <i class="fa-brands fa-weixin text-green-600 cursor-pointer mt-4 text-xl mr-5"></i>
+                <i class="fa-brands fa-alipay text-blue-400 cursor-pointer mt-4 text-xl mr-5"></i>
+                <i class="fa-brands fa-qq text-blue-800 cursor-pointer mt-4 text-xl mr-5"></i>
+                <i class="fa-brands fa-tiktok text-red-300 cursor-pointer mt-4 text-xl mr-5"></i>
+                <i class="fa-brands fa-weibo text-red-400 cursor-pointer mt-4 text-xl mr-5"></i>
+              </div>
             </form>
-
-            <p class="mt-6 text-sm text-center text-gray-400">
-              Don&#x27;t have an account yet?
-              <a href="#" class="text-blue-500 focus:outline-none focus:underline hover:underline">Sign up</a>.
+            <p class="mt-4 text-sm text-center text-gray-400">
+              还没有账号?
+              <a href="#" class="text-blue-500 focus:outline-none focus:underline hover:underline">注册</a>
             </p>
           </div>
         </div>
@@ -76,11 +81,31 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
-const form = reactive({
-  account: '',
-  password: '',
+import Userapi from '@/apis/userApis'
+import validate from '@/plugins/validate/index'
+const { handleSubmit } = validate.useForm({ initialValues: { account: '798868370@qq.com', password: '123456' } })
+const { errorMessage: accountError, value: accountValue } = validate.useField(
+  'account',
+  validate.yup
+    .string()
+    .required()
+    .label('账户')
+    .matches(/^.+@.+|\d{11}$/)
+)
+
+const {
+  value: passwordValue,
+  errorMessage: passwordError,
+  handleChange,
+} = validate.useField('password', validate.yup.string().required().label('密码').min(6))
+const onSubmit = handleSubmit(v => {
+  console.log(v);
+   Userapi.login(v)
 })
+
+// const r = await Userapi.info()
+// console.log(r);
+
 </script>
 
 <style scoped></style>

@@ -13,7 +13,6 @@ import setupPlugins from './vite/plugins'
 //开发模式
 //运行
 export default ({ command, mode }: ConfigEnv) => {
-  console.log(command, mode)
   const isBuild = command == 'build'
   const root = process.cwd()
   const env = parseEnv(loadEnv(mode, root))

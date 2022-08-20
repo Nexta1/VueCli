@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 //在ts改paths
 import router, { setupRouter } from '@/router'
-import { setupPlugin } from './plugins'
+import { setupPlugin } from '@/plugins'
 
 async function bootstrap() {
   const app = createApp(App)

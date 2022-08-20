@@ -11,9 +11,11 @@ function info(){
         url:'info'
     })
 }
-function login(){
+function login(data :any){
     return http.request<Login>({
-        url:'login'
+        url:'login',
+        method:'post',
+        data
     })
 }
 
