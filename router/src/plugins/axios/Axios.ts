@@ -5,6 +5,7 @@ export default class Axios {
     this.instance = axios.create(config)
     this.interceptors()
   }
+
   private interceptors() {
     this.interceptorsRequest()
     this.interceptorsResponse()
@@ -19,9 +20,10 @@ export default class Axios {
       }
     })
   }
+
   private interceptorsRequest() {
     // 添加请求拦截器
-    axios.interceptors.request.use(
+    this.instance.interceptors.request.use(
       config => {
         // 在发送请求之前做些什么
         return config
@@ -34,7 +36,7 @@ export default class Axios {
   }
   private interceptorsResponse() {
     // 添加响应拦截器
-    axios.interceptors.response.use(
+    this.instance.interceptors.response.use(
       response => {
         // 2xx 范围内的状态码都会触发该函数。
         // 对响应数据做点什么

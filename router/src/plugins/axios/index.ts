@@ -1,6 +1,6 @@
 import Axios from './Axios'
 const http = new Axios({
-  baseURL: './api',
+  baseURL: 'http://127.0.0.1:5173/api',
   timeout: 100000,
   headers: {},
 })
