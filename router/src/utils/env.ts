@@ -1,11 +1,5 @@
 import _ from 'lodash'
-class Helper {
-  public env = {} as ImportMetaEnv
-  constructor() {
-    this.env = this.getEnvs()
-  }
-  private getEnvs(): ImportMetaEnv {
-    const envs: any = _.cloneDeep(import.meta.env)
+const envs: any = _.cloneDeep(import.meta.env)
 
     Object.entries(import.meta.env as Record<string, any>).forEach(([key, value]) => {
       if (value == 'true' || value == 'false') {
@@ -15,10 +9,4 @@ class Helper {
       else if (value == 'undefined') envs[key] = undefined
       //   else envs[key] = value
     })
-    return envs
-  }
-}
-const helper =new Helper()
-const env = helper.env
-export default helper
-export {env}
+export default envs as ViteEnv

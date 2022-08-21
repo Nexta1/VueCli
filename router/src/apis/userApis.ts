@@ -4,6 +4,7 @@ interface User {
     age:number;
 }
 interface Login{
+   
     token:string;
 }
 function info(){

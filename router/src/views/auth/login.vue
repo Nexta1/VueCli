@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import userApis from '@/apis/userApis'
+import util from '@/utils'
 import Userapi from '@/apis/userApis'
 import validate from '@/plugins/validate/index'
 const { handleSubmit } = validate.useForm({ initialValues: { account: '798868370@qq.com', password: '123456' } })
@@ -100,11 +100,14 @@ const {
   handleChange,
 } = validate.useField('password', validate.yup.string().required().label('密码').min(6))
 const onSubmit = handleSubmit(async v => {
- 
+   const {result:{token}} = await Userapi.login(v)
    
-   const a = await Userapi.login(v)
-   console.log(a);
+   console.log(token);
    
+   util.store.set('token',{
+    token,expire:100
+   })
+
 })
 
 

@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router'
-
+import util from '@/utils'
 // viteAPI获取
 const layouts = import.meta.glob('../layouts/*.vue', { eager: true })
 const views = import.meta.glob('../views/**/*.vue', { eager: true }) /*递归 */
@@ -39,6 +39,10 @@ function getChildRoutes(layoutRoute: RouteRecordRaw) {
   })
   return routes
 }
+
+// console.log(util.env);
+
+
 export default getRoutes()
 
 
