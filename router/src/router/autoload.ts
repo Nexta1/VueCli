@@ -25,7 +25,7 @@ function getRouteByModule(file: string, module: { [key: string]: any }) {
     component: module.default,
   } as RouteRecordRaw
   //自定义会接受
-//   Object.assign(route,module.default.route)
+  Object.assign(route,module.default.route)
   return route
 }
 //布局子路由

@@ -84,6 +84,8 @@
 import util from '@/utils'
 import Userapi from '@/apis/userApis'
 import validate from '@/plugins/validate/index'
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const { handleSubmit } = validate.useForm({ initialValues: { account: '798868370@qq.com', password: '123456' } })
 const { errorMessage: accountError, value: accountValue } = validate.useField(
   'account',
@@ -100,20 +102,20 @@ const {
   handleChange,
 } = validate.useField('password', validate.yup.string().required().label('密码').min(6))
 const onSubmit = handleSubmit(async v => {
-   const {result:{token}} = await Userapi.login(v)
-   
-   console.log(token);
-   
-   util.store.set('token',{
-    token,expire:100
-   })
-
+  const {
+    result: { token },
+  } = await Userapi.login(v)
+  util.store.set('token', {
+    token,
+  })
+router.push({name:'home'})
 })
-
-
-
-
-
 </script>
 
 <style scoped></style>
+
+<script lang="ts">
+export default {
+  route: { name: 'login',meta:{guest:true} },
+}
+</script>

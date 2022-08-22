@@ -8,13 +8,13 @@
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
-    },
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -25,6 +25,7 @@
     "vite/**/*.ts",
     "mock/**/*.ts",
     "types/**/*.d.ts",
+    "types/routers.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -30,9 +30,7 @@ input {
 }
 </style>
 
-<!-- <script>
+<script lang="ts">
 //会被module收到
-export default {
-    route:{path:'/user'}
-}
-</script> -->
+
+</script>
