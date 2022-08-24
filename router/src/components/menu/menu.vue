@@ -10,7 +10,12 @@
         </i>
         <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': item.active }"></i>
       </dt>
-      <dd v-for="(child, index) in item.children" :class="[{ active: child.active },'bg-gray-600']" v-show="item.active" :key="index">
+      <dd
+        v-for="(child, index) in item.children"
+        :class="[{ active: child.active }, 'bg-gray-600']"
+        v-show="item.active"
+        :key="index"
+      >
         {{ child.title }}
       </dd>
     </dl>
@@ -21,12 +26,12 @@
 import { reactive } from '@vue/reactivity'
 import { router } from '@/store/router'
 const routerStore = router()
-console.log(routerStore.addcount);
-
+console.log(routerStore.routes)
 interface IMenuItem {
   title: string
   icon?: string
   active?: boolean
+  show?: boolean
 }
 interface IMenu extends IMenuItem {
   children?: IMenuItem[]
@@ -37,7 +42,7 @@ const menus = reactive<IMenu[]>([
     title: '我的世界',
     icon: 'fas fa-dove',
     active: true,
-    children: [{ title: '中国', active: true }, { title: '美国' }, { title: '英国' }],
+    children: [{ title: '中国', active: true, show: true }, { title: '美国' }, { title: '英国' }],
   },
   { title: '编辑器', icon: 'fab fa-wordpress', children: [{ title: '富文本编辑器' }, { title: 'MarkDown' }] },
 ])
