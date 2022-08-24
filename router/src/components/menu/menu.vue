@@ -8,9 +8,9 @@
         <i :class="['text-sm', item.icon, 'text-red-300']">
           <span class="ml-3 text-white font-bold">{{ item.title }}</span>
         </i>
-        <i class="fas fa-angle-down"></i>
+        <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': item.active }"></i>
       </dt>
-      <dd v-for="(child, index) in item.children" :class="{ active: child.active }" v-show="item.active" :key="index">
+      <dd v-for="(child, index) in item.children" :class="[{ active: child.active },'bg-gray-600']" v-show="item.active" :key="index">
         {{ child.title }}
       </dd>
     </dl>
@@ -19,6 +19,9 @@
 
 <script setup lang="ts">
 import { reactive } from '@vue/reactivity'
+import { router } from '@/store/router'
+const routerStore = router()
+console.log(routerStore.addcount);
 
 interface IMenuItem {
   title: string
@@ -60,7 +63,7 @@ dt {
   @apply text-white flex items-center justify-between m-3  cursor-pointer;
 }
 .active {
-  background: red;
+  background: red !important;
 }
 .title {
   @apply text-white font-bold align-middle text-lg;

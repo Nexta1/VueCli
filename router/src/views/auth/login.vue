@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import util from '@/utils'
+import {store} from '@/utils'
 import Userapi from '@/apis/userApis'
 import validate from '@/plugins/validate/index'
 import { useRouter } from 'vue-router';
@@ -105,7 +105,7 @@ const onSubmit = handleSubmit(async v => {
   const {
     result: { token },
   } = await Userapi.login(v)
-  util.store.set('token', {
+  store.set('token', {
     token,
   })
 router.push({name:'home'})
