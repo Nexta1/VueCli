@@ -3,7 +3,7 @@ import App from './App.vue'
 //在ts改paths
 import router, { setupRouter } from '@/router'
 import { setupPlugin } from '@/plugins'
-
+import '@/style/gloable.scss'
 async function bootstrap() {
   const app = createApp(App)
   setupRouter(app)

@@ -1,9 +1,7 @@
 <template>
-  <div>
-
+  <div class="w-100% h-100%">
     <div class="flex items-center justify-center min-h-screen bg-white py-48">
       <div class="flex flex-col">
-
         <div class="flex flex-col items-center">
           <div class="text-indigo-500 font-bold text-7xl">404</div>
 
@@ -21,8 +19,3 @@
 <script setup lang="ts"></script>
 
 <style scoped></style>
-<script lang="ts">
-export default {
-  route: { meta: { show: true } },
-}
-</script>

@@ -1,23 +1,33 @@
-import { IData } from './../utils/store'
+import { CacheEnum } from './../enum/cacheEnum';
 import store from '@/utils/store'
+import user from '@/store/userStore'
 import { Router, RouteLocationNormalized } from 'vue-router'
 class Guard {
   constructor(private router: Router) {}
   public run() {
-    // console.log(this.router)
-    this.router.beforeEach((to, from) => {
-      let token = store.get('token')
-      if (this.isLogin(to, token) === false) return { name: 'login' }
-      if (this.isGuest(to, token) === false) return from
-    })
+    this.router.beforeEach(this.beforeEach.bind(this))
   }
+
+  private token():any {
+    return store.get(CacheEnum.TOKEN_NAME)
+  }
+
+private getUserInfo(){
+  if(this.token()) user().getUserInfo()
+}
+  private beforeEach(to: RouteLocationNormalized, from: RouteLocationNormalized) {
+    if (this.isLogin(to) === false) return { name: 'login' }
+    if (this.isGuest(to) === false) return from
+    this.getUserInfo()
+  }
+
   //游客拦截
-  private isGuest(route: RouteLocationNormalized, token: any) {
-    return Boolean(!route.meta.guest || (route.meta.guest && !token?.token))
+  private isGuest(route: RouteLocationNormalized) {
+    return Boolean(!route.meta.guest || (route.meta.guest && !this.token()?.token))
   }
   //后台登录拦截y
-  private isLogin(route: RouteLocationNormalized, token: any) {
-    return Boolean(!route.meta.auth || (route.meta.auth && token?.token))
+  private isLogin(route: RouteLocationNormalized) {
+    return Boolean(!route.meta.auth || (route.meta.auth && this.token()?.token))
   }
 }
 export default (router: Router) => {

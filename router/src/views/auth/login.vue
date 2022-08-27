@@ -81,12 +81,14 @@
 </template>
 
 <script setup lang="ts">
-import {store} from '@/utils'
+import { store } from '@/utils'
 import Userapi from '@/apis/userApis'
 import validate from '@/plugins/validate/index'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
+import { CacheEnum } from '@/enum/cacheEnum';
 const router = useRouter()
 const { handleSubmit } = validate.useForm({ initialValues: { account: '798868370@qq.com', password: '123456' } })
+
 const { errorMessage: accountError, value: accountValue } = validate.useField(
   'account',
   validate.yup
@@ -101,14 +103,14 @@ const {
   errorMessage: passwordError,
   handleChange,
 } = validate.useField('password', validate.yup.string().required().label('密码').min(6))
+
 const onSubmit = handleSubmit(async v => {
   const {
     result: { token },
   } = await Userapi.login(v)
-  store.set('token', {
-    token,
-  })
-router.push({name:'home'})
+
+  store.set(CacheEnum.TOKEN_NAME, { token })
+  router.push({ name: 'home' })
 })
 </script>
 
@@ -116,6 +118,6 @@ router.push({name:'home'})
 
 <script lang="ts">
 export default {
-  route: { name: 'login',meta:{guest:true} },
+  route: { name: 'login', meta: { guest: true } },
 }
 </script>

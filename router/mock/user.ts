@@ -11,6 +11,7 @@ export default [
         type:'success',
         result: {
           name: '我TM真帅',
+          age:19
         },
       }
     },

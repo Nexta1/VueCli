@@ -1,0 +1,68 @@
+<template>
+  <div class="w-[220px] bg-gray-800 min-h-screen">
+    <i class="titleicon fas fa-rocket"></i>
+    <span class="title"> 个人空间 </span>
+    <dl class="mt-4 cursor-pointer" v-for="(route, index) in menuStore" :key="index">
+      <dt @click="handle(route)">
+        <i :class="['text-sm', route.icon, 'text-red-300']">
+          <span class="ml-3 text-white font-bold">{{ route.title }}</span>
+        </i>
+        <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': route.active }"></i>
+      </dt>
+      <dd
+        v-for="(child, index) in route.children"
+        :class="[{ active: child?.ischeck }, 'bg-gray-600']"
+        v-show="route.active"
+        :key="index"
+        @click="handle(route, child)"
+      >
+        {{ child?.title }}
+      </dd>
+    </dl>
+  </div>
+</template>
+
+<script setup lang="ts">
+//pinia
+import { IMenu } from '#/menu'
+import store from '@/store/menuStore'
+import { useRouter } from 'vue-router'
+const routeServcie = useRouter()
+const routeStore = store()
+routeStore.init()
+const menuStore = routeStore.menus
+const resetMenus = () => {
+  menuStore.forEach(pRoute => {
+    pRoute.active = false
+    pRoute.children?.forEach(route => {
+      if (route) route.ischeck = false
+    })
+  })
+}
+const handle = (pRoute: IMenu, cRoute?: any) => {
+  resetMenus()
+  pRoute.active = true
+  if (cRoute) {
+    cRoute.ischeck = true
+    routeServcie.push({ name: cRoute.route })
+  }
+}
+</script>
+
+<style scoped>
+dd {
+  @apply text-white ml-5 mr-3 hover:bg-red-500 p-1 pl-3 rounded-md text-sm mt-2;
+}
+dt {
+  @apply text-white flex items-center justify-between m-3  cursor-pointer;
+}
+.active {
+  background: red !important;
+}
+.title {
+  @apply text-white font-bold align-middle text-lg;
+}
+.titleicon {
+  @apply text-red-500 text-xl m-4 align-middle;
+}
+</style>

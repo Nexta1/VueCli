@@ -11,3 +11,9 @@
 <style scoped>
 
 </style>
+
+<script lang="ts">
+export default {
+  route: { meta: { show: true,title:'quill'} },
+}
+</script>
