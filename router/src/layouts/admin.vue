@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen">
-    <Menu />
+    <Menu  />
     <div class="flex-1 bg-zinc-300">
       <Navbar />
       <history />
@@ -25,6 +25,7 @@ watch(
   },
   { immediate: true }
 )
+
 </script>
 
 <style scoped></style>

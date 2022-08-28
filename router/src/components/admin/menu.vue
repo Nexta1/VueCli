@@ -27,10 +27,17 @@
 import { IMenu } from '#/menu'
 import store from '@/store/menuStore'
 import { useRouter } from 'vue-router'
+
 const routeServcie = useRouter()
 const routeStore = store()
 routeStore.init()
+
+//pinia
 const menuStore = routeStore.menus
+
+//composition
+
+
 const resetMenus = () => {
   menuStore.forEach(pRoute => {
     pRoute.active = false

@@ -3,7 +3,7 @@ export default {
   name: 'error',
   path: '/error',
   component: () => import('@/layouts/admin.vue'),
-  meta: { auth: true, menu: { title: '错误页面', icon: 'fab fa-adn' } },
+  meta: { auth: true, menu: { title: '错误页面', icon: 'fab fa-creative-commons-nc' } },
   children: [
     {
       name: 'error.404',

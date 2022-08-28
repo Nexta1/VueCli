@@ -2,7 +2,12 @@
   <div class="h-100vh">
     <el-row class="bg-slate-400 h-12 items-center">
       <el-col :span="22">
-        <el-breadcrumb separator="/" class="ml-4">
+        <i
+          class="fas fa-angle-left ml-4 cursor-pointer"
+          @click="menuStore.closeMenu"
+          :class="{ 'rotate-180': !menuStore.isclose, 'duration-300':true}"
+        ></i>
+        <el-breadcrumb separator="/" class="ml-4 inline-block">
           <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
           <el-breadcrumb-item><a href="/">promotion management</a></el-breadcrumb-item>
           <el-breadcrumb-item>promotion list</el-breadcrumb-item>
@@ -32,14 +37,16 @@
 
 <script setup lang="ts">
 import userInfo from '@/store/userStore'
+import store from '@/store/menuStore'
 import { user } from '@/utils'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 const userinfo = userInfo().info!
 const router = useRouter()
 const logout = () => {
   user()
-  router.push({name:'login'})
+  router.push({ name: 'login' })
 }
+const menuStore = store()
 </script>
 
 <style scoped>

@@ -9,12 +9,16 @@ export default defineStore('router', {
     return {
       menus: [] as IMenu[],
       historyMenu: [] as IMenu[],
+      isclose:true
     }
   },
   actions: {
     init() {
       this.getMenuByRoute()
       this.historyMenu = store.get(CacheEnum.HISTORY_MENU) ??[]
+    },
+    closeMenu(){
+      this.isclose = !this.isclose
     },
     removeHistoryMenu(menu: IMenu) {
       const index = this.historyMenu.indexOf(menu)
