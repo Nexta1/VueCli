@@ -1,11 +1,11 @@
 <template>
   <div class="h-100vh">
     <el-row class="bg-slate-400 h-12 items-center">
-      <el-col :span="22">
+      <el-col :span="20">
         <i
           class="fas fa-angle-left ml-4 cursor-pointer"
           @click="menuStore.closeMenu"
-          :class="{ 'rotate-180': !menuStore.isclose, 'duration-300':true}"
+          :class="{ 'rotate-180': !menuStore.isclose, 'duration-300': true }"
         ></i>
         <el-breadcrumb separator="/" class="ml-4 inline-block">
           <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
@@ -14,6 +14,7 @@
           <el-breadcrumb-item>promotion detail</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
+      <el-col :span="2"> <notification /></el-col>
       <el-col :span="2">
         <el-dropdown>
           <span class="el-dropdown-link">
@@ -30,12 +31,14 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
+        <i class="fas fa-maximize text-yellow-50 cursor-pointer text-right" @click="fullScreen"></i>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script setup lang="ts">
+import notification from '../notification.vue'
 import userInfo from '@/store/userStore'
 import store from '@/store/menuStore'
 import { user } from '@/utils'
@@ -47,6 +50,10 @@ const logout = () => {
   router.push({ name: 'login' })
 }
 const menuStore = store()
+
+const fullScreen = () => {
+  document.documentElement.requestFullscreen()
+}
 </script>
 
 <style scoped>

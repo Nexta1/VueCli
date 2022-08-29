@@ -40,8 +40,6 @@ export default defineStore('router', {
         .getRoutes()
         .filter(r => r.children.length && r.meta.menu)
         .map(route => {
-          console.log(route)
-
           let menu: IMenu = { ...route.meta?.menu }
           menu.children = route.children
             .filter(route => route.meta?.menu)

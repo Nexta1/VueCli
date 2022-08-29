@@ -1,17 +1,17 @@
 <template>
-  <div class="w-[220px] bg-gray-800 min-h-screen">
+  <div class="w-[220px] bg-gray-800 min-h-screen duration-300 whitespace-nowrap" :class="{'width':routeStore.isclose}">
     <i class="titleicon fas fa-rocket"></i>
-    <span class="title"> 个人空间 </span>
+    <span class="title" :class="{'h1':routeStore.isclose}"> 个人空间 </span>
     <dl class="mt-4 cursor-pointer" v-for="(route, index) in menuStore" :key="index">
-      <dt @click="handle(route)">
-        <i :class="['text-sm', route.icon, 'text-red-300']">
-          <span class="ml-3 text-white font-bold">{{ route.title }}</span>
+      <dt @click="handle(route)" :class="{'!justify-center':routeStore.isclose}">
+        <i :class="['text-sm', route.icon, 'text-red-300','items-center']">
+          <span class="ml-3 text-white font-bold" :class="{'h1':routeStore.isclose}">{{ route.title }}</span>
         </i>
-        <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': route.active }"></i>
+        <i class="fas fa-angle-down duration-300" :class="[{ 'rotate-180': route.active },{'h1':routeStore.isclose}]"></i>
       </dt>
-      <dd
+      <dd 
         v-for="(child, index) in route.children"
-        :class="[{ active: child?.ischeck }, 'bg-gray-600']"
+        :class="[{ active: child?.ischeck }, 'bg-gray-600',{'h1':routeStore.isclose}]"
         v-show="route.active"
         :key="index"
         @click="handle(route, child)"
@@ -34,6 +34,7 @@ routeStore.init()
 
 //pinia
 const menuStore = routeStore.menus
+console.log(menuStore);
 
 //composition
 
@@ -71,5 +72,13 @@ dt {
 }
 .titleicon {
   @apply text-red-500 text-xl m-4 align-middle;
+}
+
+.h1{
+  @apply hidden text-center m-0
+  
+}
+.width{
+  @apply w-[50px] duration-500
 }
 </style>

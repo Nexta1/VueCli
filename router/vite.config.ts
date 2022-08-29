@@ -1,5 +1,5 @@
 import { defineConfig, ConfigEnv, loadEnv } from 'vite'
-
+import proxy from './vite/plugins/server'
 import alias from './vite/alias'
 import { parseEnv } from './vite/util'
 import setupPlugins from './vite/plugins'
@@ -22,6 +22,10 @@ export default ({ command, mode }: ConfigEnv) => {
     resolve: {
       alias,
     },
+    server:{
+      proxy,
+      post:5173
+    }
   }
 }
 

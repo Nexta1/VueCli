@@ -17,7 +17,6 @@ const router = useRouter()
 const history = store()
 const data = history.historyMenu
 const del =(x:IMenu)=> history.removeHistoryMenu(x)
-
 const push =(x:IMenu) => router.push({name:x.route})
 
 </script>
