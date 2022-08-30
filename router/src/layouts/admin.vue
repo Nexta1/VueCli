@@ -14,18 +14,16 @@ import Menu from '../components/admin/menu.vue'
 import Navbar from '../components/admin/navbar.vue'
 import history from '../components/admin/history.vue'
 import store from '@/store/menuStore'
-import { useRoute } from 'vue-router'
-import { watch } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { watchEffect } from 'vue-demi'
+
 const route = useRoute()
 const menuStore = store()
-watch(
-  route,
-  () => {
-    menuStore.addHistoryMenu(route)
-  },
-  { immediate: true }
-)
 
+menuStore.init()
+watchEffect(() => {
+    menuStore.addHistoryMenu(route)
+})
 </script>
 
 <style scoped></style>

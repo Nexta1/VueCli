@@ -2,7 +2,7 @@ export default {
   name: 'operate',
   path: '/operate',
   component: () => import('@/layouts/admin.vue'),
-  meta: { auth: true, menu: { title: 'Dashboard', icon: 'fab fa-cotton-bureau' } },
+  meta: { auth: true, menu: { title: 'Dashboard', icon: 'fab fa-cotton-bureau' },permissions:'home' },
   children: [
     {
       name: 'dash',

@@ -24,7 +24,6 @@ function getRouteByModule(file: string, module: { [key: string]: any }) {
     component: module.default,
   } as RouteRecordRaw
 
-
   Object.assign(route, module.default.route)
   return route
 }

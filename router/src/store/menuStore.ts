@@ -1,7 +1,7 @@
 import { IMenu } from '#/menu'
 import { defineStore } from 'pinia'
 import router from '@/router'
-import { RouteLocationNormalized } from 'vue-router'
+import { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
 import {store} from '@/utils'
 import { CacheEnum } from '@/enum/cacheEnum'
 export default defineStore('router', {
@@ -9,7 +9,8 @@ export default defineStore('router', {
     return {
       menus: [] as IMenu[],
       historyMenu: [] as IMenu[],
-      isclose:true
+      isclose:true,
+      bread:[]as RouteRecordNormalized[]
     }
   },
   actions: {
@@ -26,6 +27,10 @@ export default defineStore('router', {
     },
     addHistoryMenu(route: RouteLocationNormalized) {
       if (!route.meta?.menu) return
+      //添加面包屑
+      this.bread = route.matched
+      console.log(route);
+      
       const menu: IMenu = { ...route.meta?.menu, route: route.name as string }
       const isHas = this.historyMenu.some(menu => menu.route == route.name)
       if (!isHas) this.historyMenu.unshift(menu)
