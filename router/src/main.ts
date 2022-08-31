@@ -6,8 +6,8 @@ import { setupPlugin } from '@/plugins'
 import '@/style/gloable.scss'
 async function bootstrap() {
   const app = createApp(App)
-  setupRouter(app)
   setupPlugin(app)
+  setupRouter(app)
   //等待路由加载
   await router.isReady()
   app.mount('#app')

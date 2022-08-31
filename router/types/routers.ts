@@ -6,6 +6,6 @@ declare module 'vue-router' {
     guest?: boolean
     //路由是否显示
     menu?: IMenu
-    permissions: string[]
+    permission: string
   }
 }

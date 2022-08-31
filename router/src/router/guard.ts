@@ -25,7 +25,7 @@ private getUserInfo(){
   private isGuest(route: RouteLocationNormalized) {
     return Boolean(!route.meta.guest || (route.meta.guest && !this.token()?.token))
   }
-  //后台登录拦截y
+  //后台登录拦截
   private isLogin(route: RouteLocationNormalized) {
     return Boolean(!route.meta.auth || (route.meta.auth && this.token()?.token))
   }

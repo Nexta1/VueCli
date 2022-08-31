@@ -9,7 +9,7 @@
         @click="push(item)"
         :class="{ active: $route.name == item.route }"
       >
-        {{ item.title }}<el-icon class="ml-4" @click="del(item)"><CircleClose /></el-icon>
+        {{ item.title }}<el-icon class="ml-4" @click="history.removeHistoryMenu(item)"><CircleClose /></el-icon>
       </el-button>
     </div>
   </div>
@@ -26,13 +26,7 @@ const history = store()
 
 
 const data = history.historyMenu
-
-const del = (x: IMenu) => {
-  history.removeHistoryMenu(x)
-}
-
 const push = (x: IMenu) => {
-  console.log(x);
   router.push({ name: x.route })
 }
 </script>

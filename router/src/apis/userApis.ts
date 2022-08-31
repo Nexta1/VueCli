@@ -2,6 +2,7 @@ import { http } from '@/plugins/axios'
 export interface User {
   name: string
   age: number
+  permissions:string[]
 }
 interface Login {
   token: string

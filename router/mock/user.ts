@@ -12,7 +12,7 @@ export default [
         result: {
           name: '我TM真帅',
           age:19,
-          Permissions:['editor','error']
+          permissions:['editor','error']
         },
       }
     },

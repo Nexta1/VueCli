@@ -9,13 +9,13 @@ export default {
       name: 'error.404',
       path: '404',
       component: () => import('@/views/errors/404.vue'),
-      meta: { menu: { title: '404页面' } },
+      meta: { menu: { title: '404页面' },permission:'404'},
     },
     {
       name: 'error.403',
       path: '403',
       component: () => import('@/views/errors/403.vue'),
-      meta: { menu: { title: '403页面' } },
+      meta: { menu: { title: '403页面' },permission:'403' },
     },
     {
       name: 'error.200',
