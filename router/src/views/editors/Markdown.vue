@@ -1,19 +1,14 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <Editor v-model="content" :height="500" placeholder="请输入内容" />
+    {{content}}
+  </div>
 </template>
 
 <script setup lang="ts">
 
+import { ref } from 'vue'
+const content = ref('')
 </script>
 
-<style scoped>
-
-</style>
-
-<script lang="ts">
-export default {
-  route: { meta: { show: true,title:'Mackdown',ischeck:true} },
-}
-</script>
+<style scoped></style>

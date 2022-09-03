@@ -3,6 +3,7 @@ import proxy from './vite/plugins/server'
 import alias from './vite/alias'
 import { parseEnv } from './vite/util'
 import setupPlugins from './vite/plugins'
+import { visualizer } from 'rollup-plugin-visualizer'
 // export default defineConfig({
 //   plugins: [vue()],
 //   resolve: {
@@ -18,14 +19,26 @@ export default ({ command, mode }: ConfigEnv) => {
   const env = parseEnv(loadEnv(mode, root))
   return {
     // plugins: [vue()],
-    plugins:setupPlugins(isBuild ,env),
+    plugins: [...setupPlugins(isBuild, env), visualizer()],
     resolve: {
       alias,
     },
-    server:{
+    server: {
       proxy,
-      post:5173
-    }
+      post: 5173,
+    },
+    build: {
+      rollupOptions: {
+        emptyOutDir: true,
+        output: {
+          manualChunks(id :string) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          },
+        },
+      },
+    },
+    
   }
 }
-

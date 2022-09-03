@@ -17,6 +17,7 @@ export default [
       }
     },
   },
+
   {
     url: '/api/login',
     method: 'post',

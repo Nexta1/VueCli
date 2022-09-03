@@ -1,19 +1,17 @@
 <template>
-    <div>
-
-    </div>
+  <div>
+    <WangWangeditor />
+  </div>
 </template>
 
 <script setup lang="ts">
 
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
 <script lang="ts">
 export default {
-  route: { meta: { show: true,title:'wangEditor'} },
+  route: { meta: { show: true, title: 'wangEditor' } },
 }
 </script>

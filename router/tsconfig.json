@@ -12,10 +12,12 @@
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./types/*"],
-    }
+    },
+    "types": ["element-plus/global", "echarts", "lodash"]
   },
   "include": [
     "src/**/*.ts",
@@ -26,7 +28,6 @@
     "vite/**/*.ts",
     "mock/**/*.ts",
     "types/**/*.d.ts",
-    "types/routers.ts"
+    "types/**/*.ts"
   ],
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
